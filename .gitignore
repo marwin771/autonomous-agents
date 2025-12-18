@@ -1,0 +1,14 @@
+# Secrets
+.env
+venv/
+__pycache__/
+*.pyc
+
+# Data & Output
+data/*.db
+data/*.sqlite
+output_chart.png
+
+# IDEs
+.vscode/
+.idea/
