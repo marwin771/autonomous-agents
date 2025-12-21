@@ -15,8 +15,12 @@ An intelligent, multi-agent system built with **LangGraph** that provides secure
 4. Install dependencies: `pip install -r requirements.txt`
 
 ## Configuration
-Create a `.env` file in the root and add your OpenAI key:
+1. Create a `.env` file in the root and add your OpenAI key:
 `OPENAI_API_KEY=your_key_here`
+2. Place your SQLite files in the `/data` folder. The system expects the following names:
+- `sakila.db`
+- `chinook.db`
+- `northwind_small.sqlite`
 
 ## Testing
 Run the evaluation suite:
