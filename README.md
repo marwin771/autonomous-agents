@@ -3,10 +3,12 @@
 An intelligent, multi-agent system built with **LangGraph** that provides secure, natural language access to corporate databases.
 
 ## Features
-- **Multi-Agent Workflow:** Orchestrates a 'Data Analyst' and a 'Brand Visualizer'.
-- **Security-First:** Middleware permission layer restricts users to specific databases.
-- **Corporate Branding:** Automated chart generation using corporate HEX palettes.
-- **SQL Expert:** Handles complex joins and circular dependencies (e.g., Sakila schema).
+- **User Controllability:** Full agent control through an intuitive Streamlit UI, enabling natural language data exploration.
+- **User Restriction:** Granular access control logic that maps specific users to authorized databases, preventing unauthorized data leaks.
+- **Easy Integration:** A simplified registry system allowing for the rapid addition of new SQLite databases without modifying core agent logic.
+- **Automated Testing:** A comprehensive evaluation suite with 3+ automated test cases demonstrating security, SQL accuracy, and visualization correctness.
+- **Multi-Agent Workflow:** Stateful orchestration using LangGraph to manage the handoff between specialized Analyst and Visualizer agents.
+- **Company Styling:** Automated chart generation using company's official colors.
 
 ## Installation
 1. Clone the repo: `git clone https://https://github.com/marwin771/autonomous-agents.git`
@@ -21,6 +23,9 @@ An intelligent, multi-agent system built with **LangGraph** that provides secure
 - `sakila.db`
 - `chinook.db`
 - `northwind_small.sqlite`
+
+## Usage
+To launch the interactive dashboard, run: `streamlit run ui/app.py`
 
 ## Testing
 Run the evaluation suite:
