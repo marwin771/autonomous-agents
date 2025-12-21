@@ -4,8 +4,8 @@ An intelligent, multi-agent system built with **LangGraph** that provides secure
 
 ## Features
 - **User Controllability:** Full agent control through an intuitive Streamlit UI, enabling natural language data exploration.
-- **User Restriction:** Granular access control logic that maps specific users to authorized databases, preventing unauthorized data leaks.
-- **Easy Integration:** A simplified registry system allowing for the rapid addition of new SQLite databases without modifying core agent logic.
+- **User Restriction:** Middleware permission layer restricts users to specific databases.
+- **Easy Integration:** A simplified registry system allowing for the rapid addition of new databases without modifying core agent logic.
 - **Automated Testing:** A comprehensive evaluation suite with 3+ automated test cases demonstrating security, SQL accuracy, and visualization correctness.
 - **Multi-Agent Workflow:** Stateful orchestration using LangGraph to manage the handoff between specialized Analyst and Visualizer agents.
 - **Company Styling:** Automated chart generation using company's official colors.
