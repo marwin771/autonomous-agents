@@ -1,3 +1,4 @@
+# ui/app.py
 import streamlit as st
 import sys
 import os
@@ -11,7 +12,7 @@ load_dotenv()
 st.set_page_config(page_title="AI Data Agent", layout="wide")
 
 # --- Sidebar: User Authentication Simulator ---
-st.sidebar.title("🔐 User Access Control")
+st.sidebar.title("User Access Control")
 user_id = st.sidebar.selectbox("Select User ID", options=list(USER_DB_PERMISSIONS.keys()))
 
 # Dynamically filter databases based on selected user
@@ -21,7 +22,7 @@ db_key = st.sidebar.selectbox("Select Database", options=allowed_dbs)
 st.sidebar.info(f"Logged in as: **{user_id}**\nAccessing: **{db_key}**")
 
 # --- Main Interface ---
-st.title("📊 Autonomous Data Analyst & Visualizer")
+st.title("Autonomous Data Analyst & Visualizer")
 st.markdown("Ask questions about your data. The agents will handle the SQL and the styling.")
 
 if "messages" not in st.session_state:
@@ -33,30 +34,40 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # User Input
-if prompt := st.chat_input("Ex: 'Show me the top 5 customers by revenue and plot a bar chart'"):
+if prompt := st.chat_input("Ex: 'Find the top 5 genres by revenue, then plot them in a bar chart.'"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
         with st.spinner("Analyzing data and generating visuals..."):
-            # Execute the LangGraph workflow
+            # 1. Execute the LangGraph workflow
             result = run_agent_workflow(user_id, db_key, prompt)
-            
-            # Display Text Result
-            st.markdown(result["messages"][-1].content)
-            
-            # Check for generated chart
-            if os.path.exists("output_chart.png"):
+            ans_text = result["messages"][-1].content
+
+            # 2. Display Text Result
+            st.markdown(ans_text)
+
+            # 3. Handle the image safely
+            if result.get("has_visual") and os.path.exists("output_chart.png"):
+                # Display the image to the user
                 st.image("output_chart.png", caption="Company Style Visualization")
-                # Store for history
+
+                # Update history with the text and the IMAGE DATA (not just the path)
+                # Opening as bytes ensures the image stays in history even after deletion
+                with open("output_chart.png", "rb") as f:
+                    img_bytes = f.read()
+
                 st.session_state.messages.append({
-                    "role": "assistant", 
-                    "content": result["messages"][-1].content,
-                    "image": "output_chart.png"
+                    "role": "assistant",
+                    "content": ans_text,
+                    "image": img_bytes
                 })
+
+                # CLEANUP: Delete the file so it doesn't show up in the next turn
+                os.remove("output_chart.png")
             else:
                 st.session_state.messages.append({
-                    "role": "assistant", 
-                    "content": result["messages"][-1].content
+                    "role": "assistant",
+                    "content": ans_text
                 })

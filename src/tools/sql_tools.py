@@ -15,7 +15,6 @@ def get_db_for_user(user_id: str, db_key: str):
     if db_key not in allowed_dbs:
         raise PermissionError(f"User {user_id} does not have access to {db_key}.")
 
-    # 3. Establish a connection (using read-only mode for safety)
+    # 3. Establish a connection
     db_path = DB_REGISTRY[db_key]
-    # Note: Using 'mode=ro' is a best practice for security
     return SQLDatabase.from_uri(f"sqlite:///{db_path}")

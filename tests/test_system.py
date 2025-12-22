@@ -29,8 +29,8 @@ def test_sql_analysis_accuracy():
 
     result = run_agent_workflow("admin_user", "chinook", query)
 
-    assert "messages" in result
-    final_answer = result["messages"][-1].content
+    assert "messages" in result # checks that the agent actually returned a response
+    final_answer = result["messages"][-1].content # grabs the last thing the AI said
     assert len(final_answer) > 0
     # Chinook has thousands of tracks, so the answer should contain digits
     assert any(char.isdigit() for char in final_answer)
@@ -41,7 +41,7 @@ def test_sql_analysis_accuracy():
 def test_visualization_generation():
     print("\n[Test 3] Checking Visualization Generation...")
     if os.path.exists("output_chart.png"):
-        os.remove("output_chart.png")
+        os.remove("output_chart.png") # delete any old version
 
     # We ask for a specific plot from the Sakila database
     query = "Plot the top 5 film categories by number of films."
