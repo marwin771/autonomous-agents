@@ -11,7 +11,7 @@ An intelligent, multi-agent system built with **LangGraph** that provides secure
 - **Company Styling:** Automated chart generation using company's official colors.
 
 ## Installation
-1. Clone the repo: `git clone https://https://github.com/marwin771/autonomous-agents.git`
+1. Clone the repo: `git clone https://github.com/marwin771/autonomous-agents.git`
 2. Create a virtual environment: `python -m venv venv`
 3. Activate it: `source venv/bin/activate` (or `venv\Scripts\activate` on Windows)
 4. Install dependencies: `pip install -r requirements.txt`
